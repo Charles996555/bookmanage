@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jincheng.bookmanage.dao.BookDao">
+
+
+	<select id="findCount" resultType="Integer">
+		select count(*) from book
+	</select>
+
+	<!--分页-->
+	<select id="findByPage" resultType="com.jincheng.bookmanage.entity.Book">
+		select * from book limit #{index},9
+	</select>
+
+	<!--按照书籍类型查找-->
+	<select id="findByBookType" resultType="com.jincheng.bookmanage.entity.Book">
+		select * from book where type = #{type} limit #{index},9
+	</select>
+
+	<!--按照书籍类型查找该类型总数-->
+	<select id="findCountByType" resultType="Integer" parameterType="String">
+		select count(*) from book where type = #{type}
+	</select>
+
+	<!--查找某一本具体的书籍-->
+	<select id="findOneBookById" resultType="com.jincheng.bookmanage.entity.Book">
+		select * from book where id = #{id}
+	</select>
+
+	<!--根据书的名字查找对应图片-->
+	<select id="findImgByBookName" resultType="String">
+		select img from book where name=#{name}
+	</select>
+</mapper>
