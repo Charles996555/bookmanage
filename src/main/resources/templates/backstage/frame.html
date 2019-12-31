@@ -38,7 +38,42 @@
 		<!-- 公共样式 结束 -->
 		
 		<link rel="stylesheet" type="text/css" href="/css/frameStyle.css">
-		<script type="text/javascript" src="/framework/frame.js" ></script>
+		<script type="text/javascript" src="/framework/frame.js" th:inline="javascript"></script>
+		<script type="text/javascript" th:inline="javascript">
+			//二级菜单点击后的处理方法
+			function menuCAClick(url,_this){
+
+				var managename=[[${managename}]];
+
+				//处理frameMain url地址
+				$("#mainIframe").attr("src",url+managename);
+
+				//处理frameMain title名称变化
+				if($(_this).find("i").attr("class") == "iconfont icon-yonghu1"){
+					$("#frameMainTitle span").html('<i class="iconfont icon-xianshiqi"></i>个人资料');
+					return;
+				}
+				if($(_this).text() == "修改密码"){
+					$("#frameMainTitle span").html('<i class="iconfont icon-xianshiqi"></i>'+$(_this).text());
+					return;
+				}
+				if($(_this).attr("class") == "menuFA"){
+					$("#frameMainTitle span").html('<i class="iconfont icon-xianshiqi"></i>'+$(_this).text());
+				}else{
+					//显示父菜单
+//		$("#frameMainTitle span").html('<i class="iconfont icon-xianshiqi"></i>'+$(_this).parent().parent().siblings(".menuFA").text());
+					//显示子菜单
+					$("#frameMainTitle span").html('<i class="iconfont icon-xianshiqi"></i>'+$(_this).text());
+				}
+
+				//处理菜单样式变化
+				$(_this).css("cssText", "background-color:#fbcc19 !important;").css("color","#FFF");
+				$(_this).parent().siblings().find("a").css("cssText", "background-color:#transparent").css("color","#c2c2c2");
+				$(_this).parent().parent().parent().siblings().find("dl dt a").css("cssText", "background-color:#transparent").css("color","#c2c2c2")
+
+			};
+
+		</script>
 		
 	</head>
 
@@ -48,8 +83,8 @@
 		    <div class="logo">
 		        <img src="/images/logo.png"/>
 		        <div class="logoText">
-		            <h1>穷在闹市出品</h1>
-		            <p>qiongzainaoshi</p>
+		            <h1>后台管理系统</h1>
+		            <p>WELCOME</p>
 		        </div>
 		    </div>
 		    <div class="menu">
@@ -57,9 +92,6 @@
 		        	<li>
 		                <a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('/toqdAPI',this)"><i class="iconfont icon-zhishi left"></i>前端API</a>
 		            </li>
-		        	<li>
-		                <a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('backstage/tgls/iconfont.html',this)"><i class="iconfont icon-huojian left"></i>iconfont字体库</a>
-		           	</li>
 		        	<li>
 		                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-liuliangyunpingtaitubiao03 left"></i>分管管理<i class="iconfont icon-dajiantouyou right"></i></a>
 		                <dl>
@@ -112,8 +144,8 @@
 				<img class="jt" src="/images/top_jt.png"/>
 				<div class="topMenu">
 					<ul>
-						<li><a href="javascript:void(0)" onclick="menuCAClick('backstage/tgls/modify_password.html',this)"><i class="iconfont icon-yonghu1"></i>管理员</a></li>
-						<li><a href="javascript:void(0)" onclick="menuCAClick('backstage/tgls/modify_password.html',this)"><i class="iconfont icon-xiugaimima"></i>修改密码</a></li>
+						<li><a href="javascript:void(0)" onclick="menuCAClick('/manage/toModify_message?managename=',this)"><i class="iconfont icon-yonghu1"></i>[[${managename}]]</a></li>
+						<li><a href="javascript:void(0)" onclick="menuCAClick('/manage/toModify_password?managename=',this)"><i class="iconfont icon-xiugaimima"></i>修改密码</a></li>
 						<li><a href="login.html"><i class="iconfont icon-084tuichu"></i>注销</a></li>
 					</ul>
 				</div>

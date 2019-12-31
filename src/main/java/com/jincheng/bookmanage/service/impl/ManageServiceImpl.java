@@ -1,6 +1,7 @@
 package com.jincheng.bookmanage.service.impl;
 
 import com.jincheng.bookmanage.dao.ManageDao;
+import com.jincheng.bookmanage.entity.Manage;
 import com.jincheng.bookmanage.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,26 @@ public class ManageServiceImpl implements ManageService {
         }
         model.addAttribute("msg1","登录成功");
         return true;
+    }
+
+    @Override
+    public Manage findManagerByManagename(String username) {
+        return dao.findManagerByManagename(username);
+    }
+
+    @Override
+    public String changePassword(String username, String oldpassword, String password, String password2) {
+        if (username==null){
+            return "用户异常，请练习信息管理人员！";
+        }
+        Manage manage=dao.findManagerByManagename(username);
+        if(!manage.getPassword().equals(oldpassword)){
+            return "您输入的原密码有误，请重新输入！";
+        }
+        if(!password.equals(password2)){
+            return "您两次输入的密码不相同，请检查！";
+        }
+        dao.changePassword(username,password);
+        return "修改成功！！";
     }
 }
