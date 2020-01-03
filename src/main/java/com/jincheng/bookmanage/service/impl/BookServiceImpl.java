@@ -1,5 +1,7 @@
 package com.jincheng.bookmanage.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jincheng.bookmanage.dao.BookDao;
 import com.jincheng.bookmanage.dto.BookDto;
 import com.jincheng.bookmanage.entity.Book;
@@ -45,5 +47,15 @@ public class BookServiceImpl implements BookService {
     @Override
     public String findImgByBookName(String name) {
         return dao.findImgByBookName(name);
+    }
+
+    @Override
+    public PageInfo<Book> getBookList(int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        List<Book> list = dao.findAllBooks();
+        //用PageInfo对结果进行包装
+        PageInfo<Book> page = new PageInfo<Book>(list);
+        return page;
+
     }
 }

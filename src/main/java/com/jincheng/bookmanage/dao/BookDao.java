@@ -1,6 +1,7 @@
 package com.jincheng.bookmanage.dao;
 
 import com.jincheng.bookmanage.entity.Book;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -12,4 +13,7 @@ public interface BookDao {
 
     Book findOneBookById(Integer id);
     String findImgByBookName(String name);
+
+    @Select("select * from book")
+    List<Book> findAllBooks();
 }

@@ -8,27 +8,27 @@
 		<meta name="renderer" content="webkit">
 		<!--国产浏览器高速模式-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="穷在闹市" />
+		<meta name="author" content="后台管理" />
 		<!-- 作者 -->
-		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<meta name="revised" content="后台管理.v3, 2019/05/01" />
 		<!-- 定义页面的最新版本 -->
 		<meta name="description" content="网站简介" />
 		<!-- 网站简介 -->
 		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
-		<title>穷在闹市出品</title>
+		<title>后台管理界面</title>
 
 		<!-- 公共样式 开始 -->
-		<link rel="stylesheet" type="text/css" href="../..//css/base.css">
-		<link rel="stylesheet" type="text/css" href="../..//css/iconfont.css">
-		<script type="text/javascript" src="../..//framework/jquery-1.11.3.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../..//layui/css/layui.css">
-		<script type="text/javascript" src="../..//layui/layui.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/base.css">
+		<link rel="stylesheet" type="text/css" href="/css/iconfont.css">
+		<script type="text/javascript" src="/framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+		<script type="text/javascript" src="/layui/layui.js"></script>
 		<!-- 滚动条插件 -->
-		<link rel="stylesheet" type="text/css" href="../..//css/jquery.mCustomScrollbar.css">
-		<script src="../..//framework/jquery-ui-1.10.4.min.js"></script>
-		<script src="../..//framework/jquery.mousewheel.min.js"></script>
-		<script src="../..//framework/jquery.mCustomScrollbar.min.js"></script>
-		<script src="../..//framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<link rel="stylesheet" type="text/css" href="/css/jquery.mCustomScrollbar.css">
+		<script src="/framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="/framework/jquery.mousewheel.min.js"></script>
+		<script src="/framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="/framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
 		<!-- 公共样式 结束 -->
 
 	</head>
@@ -39,7 +39,7 @@
 				<form class="layui-form" action="">
 					<div class="layui-form-item">
 						<div class="layui-input-inline">
-							<input type="text" name="name" required lay-verify="required" placeholder="输入分管名称" autocomplete="off" class="layui-input">
+							<input type="text" name="name" required lay-verify="required" placeholder="输入书籍名称" autocomplete="off" class="layui-input">
 						</div>
 						<button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
 					</div>
@@ -61,58 +61,20 @@
 			<table class="layui-table">
 				<thead>
 					<tr>
-						<th>分管名称</th>
-						<th>分管编码</th>
-						<th>所属区域</th>
-						<th>负责人</th>
-						<th>登录名</th>
-						<th>联系方式</th>
-						<th>传真</th>
-						<th>邮箱</th>
+						<th>书籍名称</th>
+						<th>书籍种类</th>
+						<th>书籍价格</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>龙九山</td>
-						<td>DLS201802281450280741</td>
-						<td>无锡市</td>
-						<td>龙九山</td>
-						<td>龙九山</td>
-						<td>18600001111</td>
-						<td>028-6666666</td>
-						<td>123456789@qq.com</td>
+
+					<tr th:each="book : ${pageInfo.list}">
+						<td th:text="${book.name}"></td>
+						<td th:text="${book.type}"></td>
+						<td th:text="${book.price}"></td>
 						<td>
-							<button class="layui-btn layui-btn-xs">修改</button>
-							<button class="layui-btn layui-btn-xs">基本信息</button>
-						</td>
-					</tr>
-					<tr>
-						<td>龙九山</td>
-						<td>DLS201802281450280741</td>
-						<td>无锡市</td>
-						<td>龙九山</td>
-						<td>龙九山</td>
-						<td>18600001111</td>
-						<td>028-6666666</td>
-						<td>123456789@qq.com</td>
-						<td>
-							<button class="layui-btn layui-btn-xs">修改</button>
-							<button class="layui-btn layui-btn-xs">基本信息</button>
-						</td>
-					</tr>
-					<tr>
-						<td>龙九山</td>
-						<td>DLS201802281450280741</td>
-						<td>无锡市</td>
-						<td>龙九山</td>
-						<td>龙九山</td>
-						<td>18600001111</td>
-						<td>028-6666666</td>
-						<td>123456789@qq.com</td>
-						<td>
-							<button class="layui-btn layui-btn-xs">修改</button>
-							<button class="layui-btn layui-btn-xs">基本信息</button>
+							<a href="#" onclick="detail(${obj.id});">详情</a>
 						</td>
 					</tr>
 				</tbody>
@@ -136,6 +98,44 @@
 					});
 				});
 			</script>
+
+			<!-- 分页模块改造 -->
+			<div id="pages2">
+				<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
+					<div style="float: left;"><span class="layui-laypage-count">共 100 条</span></div>
+
+					<div style="float: left;"><a th:if="${pageInfo.hasPreviousPage}"  th:href="'/manageBook/toAgentList?pageNo='+${pageInfo.prePage}" class="layui-laypage-prev layui-disabled">上一页</a></div>
+					<!--<span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>-->
+					<!--<a href="javascript:;" data-page="2">2</a>-->
+					<!--<a href="javascript:;" data-page="3">3</a>-->
+					<!--<a href="javascript:;" data-page="4">4</a>-->
+					<!--<a href="javascript:;" data-page="5">5</a>-->
+					<!--<span class="layui-laypage-spr">…</span>-->
+					<div width="10%" th:each="nav : ${pageInfo.navigatepageNums}" style="float: left;">
+						
+						<a th:href="'/manageBook/toAgentList?pageNo='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+						
+						<span style="font-weight: bold;background-color: #009688;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}"></span>
+					
+					</div>
+
+					<div style="float: left;"><a th:if="${pageInfo.hasNextPage}" th:href="'/manageBook/toAgentList?pageNo='+${pageInfo.nextPage}" class="layui-laypage-next">下一页</a></div>
+
+
+				</div>
+			</div>
+			<!--<script>-->
+				<!--$(function(){-->
+					<!--$.ajax({-->
+						<!--type:"get",-->
+						<!--url:"/manageBook/showAllBooks",-->
+						<!--success:function(data){-->
+							<!--console.log(data);-->
+						<!--}-->
+					<!--});-->
+				<!--});-->
+
+			<!--</script>-->
 		</div>
 	</body>
 

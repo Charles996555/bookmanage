@@ -8,9 +8,9 @@
 		<meta name="renderer" content="webkit">
 		<!--国产浏览器高速模式-->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="穷在闹市" />
+		<meta name="author" content="后台管理" />
 		<!-- 作者 -->
-		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<meta name="revised" content="后台管理.v3, 2019/05/01" />
 		<!-- 定义页面的最新版本 -->
 		<meta name="description" content="网站简介" />
 		<!-- 网站简介 -->
@@ -41,7 +41,7 @@
 		<script type="text/javascript" src="/framework/frame.js" th:inline="javascript"></script>
 		<script type="text/javascript" th:inline="javascript">
 			//二级菜单点击后的处理方法
-			function menuCAClick(url,_this){
+			function menuCAClick1(url,_this){
 
 				var managename=[[${managename}]];
 
@@ -96,7 +96,7 @@
 		                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-liuliangyunpingtaitubiao03 left"></i>分管管理<i class="iconfont icon-dajiantouyou right"></i></a>
 		                <dl>
 		                	<dt><a href="javascript:void(0)" onclick="menuCAClick('backstage/tgls/agent/agent_add.html',this)">添加分管</a></dt>
-		                	<dt><a href="javascript:void(0)" onclick="menuCAClick('backstage/tgls/agent/agent_list.html',this)">分管列表</a></dt>
+		                	<dt><a href="javascript:void(0)" onclick="menuCAClick('/manageBook/toAgentList',this)">分管列表</a></dt>
 		                </dl>
 		            </li>
 		        	<li>
@@ -144,8 +144,8 @@
 				<img class="jt" src="/images/top_jt.png"/>
 				<div class="topMenu">
 					<ul>
-						<li><a href="javascript:void(0)" onclick="menuCAClick('/manage/toModify_message?managename=',this)"><i class="iconfont icon-yonghu1"></i>[[${managename}]]</a></li>
-						<li><a href="javascript:void(0)" onclick="menuCAClick('/manage/toModify_password?managename=',this)"><i class="iconfont icon-xiugaimima"></i>修改密码</a></li>
+						<li><a href="javascript:void(0)" onclick="menuCAClick1('/manage/toModify_message?managename=',this)"><i class="iconfont icon-yonghu1"></i>[[${managename}]]</a></li>
+						<li><a href="javascript:void(0)" onclick="menuCAClick1('/manage/toModify_password?managename=',this)"><i class="iconfont icon-xiugaimima"></i>修改密码</a></li>
 						<li><a href="login.html"><i class="iconfont icon-084tuichu"></i>注销</a></li>
 					</ul>
 				</div>
