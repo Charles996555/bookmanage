@@ -58,4 +58,23 @@ public class BookServiceImpl implements BookService {
         return page;
 
     }
+
+    @Override
+    public String updateOneBook(Book book) {
+        if (book.getPrice()==null||book.getName()==null||book.getId()==null||book.getImg()==null||book.getType()==null){
+            return "请不要输入空的值";
+        }
+        Book oldBook = dao.findOneBookById(book.getId());
+        if (book.equals(oldBook)){
+            return "您没有进行任何修改，请重试！！！";
+        }
+        if (book.getName().length()>20){
+            return "您输入的书籍名称不合法，请重试！！！";
+        }
+        if (book.getPrice()<0){
+            return "您输入的价格不合法，请重试！！！";
+        }
+        dao.updateOneBook(book);
+        return "修改成功！！！";
+    }
 }

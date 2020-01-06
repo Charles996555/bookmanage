@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <p>{{message}}</p>
+</div>
+
+<script src="/test/js/vue.js"></script>
+<script src="/test/js/axios.min.js"></script>
+<script>
+  const app=new Vue({
+    el:"#app",
+    data:{
+      message:""
+    },
+    created(){
+      axios({
+        url:'/test02/test',
+        method: 'get',
+        params:{
+          page : '3',
+        }
+      }).then(res => {
+        this.message=res.data;
+      })
+    }
+  })
+</script>
+
+
+</body>
+</html>

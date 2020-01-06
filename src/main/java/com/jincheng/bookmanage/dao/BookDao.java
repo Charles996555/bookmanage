@@ -1,6 +1,7 @@
 package com.jincheng.bookmanage.dao;
 
 import com.jincheng.bookmanage.entity.Book;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface BookDao {
 
     @Select("select * from book")
     List<Book> findAllBooks();
+
+    void updateOneBook(@Param("book") Book book);
 }

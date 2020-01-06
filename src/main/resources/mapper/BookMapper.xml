@@ -32,4 +32,9 @@
 	<select id="findImgByBookName" resultType="String">
 		select img from book where name=#{name}
 	</select>
+
+	<!--更新书籍信息-->
+	<update id="updateOneBook" >
+		update `book` set name=#{book.name},type=#{book.type},price=#{book.price},img=#{book.img} where id=#{book.id}
+	</update>
 </mapper>

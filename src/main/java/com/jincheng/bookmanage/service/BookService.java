@@ -15,4 +15,6 @@ public interface BookService {
     String findImgByBookName(String name);
 
     PageInfo<Book> getBookList(int pageNo, int pageSize);
+
+    String updateOneBook(Book book);
 }

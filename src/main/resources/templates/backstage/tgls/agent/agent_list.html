@@ -74,43 +74,19 @@
 						<td th:text="${book.type}"></td>
 						<td th:text="${book.price}"></td>
 						<td>
-							<a href="#" onclick="detail(${obj.id});">详情</a>
+							<button class="layui-btn layui-btn-xs layui-btn-danger"><a th:href="@{/manageBook/deleteBook(id=${book.id})}">删除</a></button>
+							<button class="layui-btn layui-btn-xs layui-btn-normal"><a th:href="@{/manageBook/toUpdateBook(id=${book.id})}">修改</a></button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			
-			<!-- layUI 分页模块 -->
-			<div id="pages"></div>
-			<script>
-				layui.use(['laypage', 'layer'], function() {
-					var laypage = layui.laypage,
-						layer = layui.layer;
-				
-					//总页数大于页码总数
-					laypage.render({
-					    elem: 'pages'
-					    ,count: 100
-					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
-					    ,jump: function(obj){
-					      console.log(obj)
-					    }
-					});
-				});
-			</script>
 
 			<!-- 分页模块改造 -->
 			<div id="pages2">
 				<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
-					<div style="float: left;"><span class="layui-laypage-count">共 100 条</span></div>
+					<div style="float: left;"><span class="layui-laypage-count">共 [[${pageInfo.total}]] 条</span></div>
 
 					<div style="float: left;"><a th:if="${pageInfo.hasPreviousPage}"  th:href="'/manageBook/toAgentList?pageNo='+${pageInfo.prePage}" class="layui-laypage-prev layui-disabled">上一页</a></div>
-					<!--<span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>-->
-					<!--<a href="javascript:;" data-page="2">2</a>-->
-					<!--<a href="javascript:;" data-page="3">3</a>-->
-					<!--<a href="javascript:;" data-page="4">4</a>-->
-					<!--<a href="javascript:;" data-page="5">5</a>-->
-					<!--<span class="layui-laypage-spr">…</span>-->
 					<div width="10%" th:each="nav : ${pageInfo.navigatepageNums}" style="float: left;">
 						
 						<a th:href="'/manageBook/toAgentList?pageNo='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
@@ -124,18 +100,6 @@
 
 				</div>
 			</div>
-			<!--<script>-->
-				<!--$(function(){-->
-					<!--$.ajax({-->
-						<!--type:"get",-->
-						<!--url:"/manageBook/showAllBooks",-->
-						<!--success:function(data){-->
-							<!--console.log(data);-->
-						<!--}-->
-					<!--});-->
-				<!--});-->
-
-			<!--</script>-->
 		</div>
 	</body>
 

@@ -11,6 +11,6 @@ public class Book {
     private Integer id;
     private String name;
     private String type;
-    private double price;
+    private Double price;
     private String img;
 }

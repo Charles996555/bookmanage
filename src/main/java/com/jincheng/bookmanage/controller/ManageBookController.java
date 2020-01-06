@@ -1,5 +1,7 @@
 package com.jincheng.bookmanage.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.jincheng.bookmanage.entity.Book;
 import com.jincheng.bookmanage.service.BookService;
@@ -41,4 +43,20 @@ public class ManageBookController {
         PageInfo<Book> page=bookService.getBookList(pageNo,pageSize);
         return page;
     }
+
+    @RequestMapping("/toUpdateBook")
+    public String toUpdateBook(Integer id,Model model){
+        Book book = bookService.findOneBookById(id);
+        model.addAttribute("book",book);
+        return "/backstage/tgls/agent/agent_update";
+    }
+
+    @RequestMapping("/updateBook")
+    @ResponseBody
+    public String updateBook(Integer id,String name,String type,Double price,String img) throws JsonProcessingException {
+        Book book=new Book(id,name,type,price,img);
+        String temp=bookService.updateOneBook(book);
+        return new ObjectMapper().writeValueAsString(temp);
+    }
+
 }
