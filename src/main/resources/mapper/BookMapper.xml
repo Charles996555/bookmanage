@@ -37,4 +37,9 @@
 	<update id="updateOneBook" >
 		update `book` set name=#{book.name},type=#{book.type},price=#{book.price},img=#{book.img} where id=#{book.id}
 	</update>
+
+	<!--模糊查询书籍-->
+	<select id="findByBookName" resultType="com.jincheng.bookmanage.entity.Book">
+		select * from book where name like concat("%",#{name},"%")
+	</select>
 </mapper>

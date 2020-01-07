@@ -36,12 +36,12 @@
 	<body>
 		<div class="cBody">
 			<div class="console">
-				<form class="layui-form" action="">
+				<form class="layui-form" action="/manageBook/searchBook">
 					<div class="layui-form-item">
 						<div class="layui-input-inline">
 							<input type="text" name="name" required lay-verify="required" placeholder="输入书籍名称" autocomplete="off" class="layui-input">
 						</div>
-						<button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
+						<button class="layui-btn" lay-submit >检索</button>
 					</div>
 				</form>
 
@@ -74,7 +74,7 @@
 						<td th:text="${book.type}"></td>
 						<td th:text="${book.price}"></td>
 						<td>
-							<button class="layui-btn layui-btn-xs layui-btn-danger"><a th:href="@{/manageBook/deleteBook(id=${book.id})}">删除</a></button>
+							<button class="layui-btn layui-btn-xs layui-btn-danger"><div th:onclick="'deleteBook('+${book.id}+')'">删除</div></button>
 							<button class="layui-btn layui-btn-xs layui-btn-normal"><a th:href="@{/manageBook/toUpdateBook(id=${book.id})}">修改</a></button>
 						</td>
 					</tr>
@@ -85,22 +85,45 @@
 			<div id="pages2">
 				<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
 					<div style="float: left;"><span class="layui-laypage-count">共 [[${pageInfo.total}]] 条</span></div>
-
 					<div style="float: left;"><a th:if="${pageInfo.hasPreviousPage}"  th:href="'/manageBook/toAgentList?pageNo='+${pageInfo.prePage}" class="layui-laypage-prev layui-disabled">上一页</a></div>
 					<div width="10%" th:each="nav : ${pageInfo.navigatepageNums}" style="float: left;">
-						
 						<a th:href="'/manageBook/toAgentList?pageNo='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
-						
 						<span style="font-weight: bold;background-color: #009688;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}"></span>
-					
 					</div>
-
 					<div style="float: left;"><a th:if="${pageInfo.hasNextPage}" th:href="'/manageBook/toAgentList?pageNo='+${pageInfo.nextPage}" class="layui-laypage-next">下一页</a></div>
-
-
 				</div>
 			</div>
+
+
 		</div>
+
+		<!--删除功能js-->
+		<script>
+			function deleteBook(id){
+				window.event.returnValue=false;
+				let msg = "您确定要删除该条数据吗？";
+				if (confirm(msg)==true){
+					$.ajax({
+						type: "POST",
+						dataType: "json",
+						url: "/manageBook/deleteOneBook" ,
+						data: {
+							id:id,
+						},
+						success: function (result) {
+							window.alert(result);
+							window.location.href = "/manageBook/toAgentList";
+						},
+						error : function() {
+							alert("异常！");
+						}
+					});
+				}else{
+					return false;
+				}
+
+			}
+		</script>
 	</body>
 
 </html>

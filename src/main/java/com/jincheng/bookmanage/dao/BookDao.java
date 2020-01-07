@@ -1,6 +1,8 @@
 package com.jincheng.bookmanage.dao;
 
 import com.jincheng.bookmanage.entity.Book;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,4 +21,12 @@ public interface BookDao {
     List<Book> findAllBooks();
 
     void updateOneBook(@Param("book") Book book);
+
+    @Insert("insert into book values(#{book.id},#{book.name},#{book.type},#{book.price},#{book.img})")
+    void addOneBook(@Param("book")Book book);
+
+    @Delete("delete from book where id = #{id}")
+    void deleteBookById(Integer id);
+
+    List<Book> findByBookName(String name);
 }

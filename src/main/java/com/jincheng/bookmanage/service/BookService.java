@@ -17,4 +17,10 @@ public interface BookService {
     PageInfo<Book> getBookList(int pageNo, int pageSize);
 
     String updateOneBook(Book book);
+
+    String addOneBook(Book book);
+
+    String deleteOneBook(Integer id);
+
+    PageInfo<Book> getBookByName(int pageNo, int pageSize, String name);
 }

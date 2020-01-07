@@ -61,9 +61,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public String updateOneBook(Book book) {
-        if (book.getPrice()==null||book.getName()==null||book.getId()==null||book.getImg()==null||book.getType()==null){
-            return "请不要输入空的值";
-        }
+
         Book oldBook = dao.findOneBookById(book.getId());
         if (book.equals(oldBook)){
             return "您没有进行任何修改，请重试！！！";
@@ -76,5 +74,32 @@ public class BookServiceImpl implements BookService {
         }
         dao.updateOneBook(book);
         return "修改成功！！！";
+    }
+
+    @Override
+    public String addOneBook(Book book) {
+        if (book.getName().length()>20){
+            return "您输入的书籍名称不合法，请重试！！！";
+        }
+        if (book.getPrice()<0){
+            return "您输入的价格不合法，请重试！！！";
+        }
+        dao.addOneBook(book);
+        return "添加成功！！！";
+    }
+
+    @Override
+    public String deleteOneBook(Integer id) {
+        dao.deleteBookById(id);
+        return "删除成功";
+    }
+
+    @Override
+    public PageInfo<Book> getBookByName(int pageNo, int pageSize, String name) {
+        PageHelper.startPage(pageNo,pageSize);
+        List<Book> list = dao.findByBookName(name);
+        //用PageInfo对结果进行包装
+        PageInfo<Book> page = new PageInfo<Book>(list);
+        return page;
     }
 }
