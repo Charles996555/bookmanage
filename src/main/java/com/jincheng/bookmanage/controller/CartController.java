@@ -19,7 +19,7 @@ public class CartController {
     @Autowired
     CartService service;
 
-    @RequestMapping("toCart")
+    @RequestMapping("/toCart")
     public String toCart(Model model,HttpSession session){
 
         //展示购物车数据

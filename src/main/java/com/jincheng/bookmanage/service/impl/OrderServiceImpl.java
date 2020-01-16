@@ -1,5 +1,7 @@
 package com.jincheng.bookmanage.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jincheng.bookmanage.dao.OrderDao;
 import com.jincheng.bookmanage.dto.BookCartDto;
 import com.jincheng.bookmanage.entity.Order;
@@ -36,5 +38,31 @@ public class OrderServiceImpl implements OrderService {
         Order order=new Order(0,ordernumber,username,createtime,"0000-00-00 00:00:00",totalPrice,0);
         dao.saveAddMessage(order.getOrdernumber(),order.getUsername(),order.getCreatetime(),order.getUpdatetime(),totalPrice,order.getIspay());
 
+    }
+
+    @Override
+    public PageInfo<Order> getOrderList(int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        List<Order> list = dao.findAllOrders();
+        //用PageInfo对结果进行包装
+        PageInfo<Order> page = new PageInfo<Order>(list);
+        return page;
+    }
+
+    @Override
+    public String deleteOrder(Integer id) {
+
+        dao.deleteOrder(id);
+        return "删除成功！";
+    }
+
+    @Override
+    public Double getOrderTotalPrice() {
+        return dao.getOrderTotalPrice();
+    }
+
+    @Override
+    public Double getPayOrderPrice() {
+        return dao.getPayOrderPrice();
     }
 }

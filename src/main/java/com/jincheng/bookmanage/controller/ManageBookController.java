@@ -34,7 +34,7 @@ public class ManageBookController {
     public String toAgentList(@RequestParam(value="pageNo",defaultValue="1")int pageNo, @RequestParam(value="pageSize",defaultValue="10")int pageSize, Model model){
         PageInfo<Book> page=bookService.getBookList(pageNo,pageSize);
         model.addAttribute("pageInfo",page);
-        return "/backstage/tgls/agent/agent_list";
+        return "backstage/tgls/agent/agent_list";
     }
 
     /**
@@ -44,7 +44,7 @@ public class ManageBookController {
     public String searchBook(@RequestParam(value="pageNo",defaultValue="1")int pageNo, @RequestParam(value="pageSize",defaultValue="30")int pageSize,String name, Model model){
         PageInfo<Book> page=bookService.getBookByName(pageNo,pageSize,name);
         model.addAttribute("pageInfo",page);
-        return "/backstage/tgls/agent/agent_list";
+        return "backstage/tgls/agent/agent_list";
     }
 
     /**
@@ -52,7 +52,7 @@ public class ManageBookController {
      */
     @RequestMapping("/toAgentAdd")
     public String toAgentAdd(){
-        return "/backstage/tgls/agent/agent_add";
+        return "backstage/tgls/agent/agent_add";
     }
 
     /**
@@ -70,7 +70,7 @@ public class ManageBookController {
     public String toUpdateBook(Integer id,Model model){
         Book book = bookService.findOneBookById(id);
         model.addAttribute("book",book);
-        return "/backstage/tgls/agent/agent_update";
+        return "backstage/tgls/agent/agent_update";
     }
 
     /**

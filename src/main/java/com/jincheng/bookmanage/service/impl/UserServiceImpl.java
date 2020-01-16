@@ -19,4 +19,16 @@ public class UserServiceImpl implements UserService {
             return true;
         }else return false;
     }
+
+    @Override
+    public String register(String username, String password) {
+        if (username.length()>9||username.length()<3){
+            return "请输入3至9位账号";
+        }
+        if (password.length()>15||password.length()<3){
+            return "请输入3至15位密码";
+        }
+        dao.addOne(username,password);
+        return "注册成功";
+    }
 }

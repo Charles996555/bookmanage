@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
+/**
+ * 国际化组件处理
+ */
 @Configuration
 public class MyLocaleResolver implements LocaleResolver {
 

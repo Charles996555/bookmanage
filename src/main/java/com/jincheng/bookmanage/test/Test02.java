@@ -4,10 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jincheng.bookmanage.dto.BookDto;
 import com.jincheng.bookmanage.service.BookService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: 张雨潇
@@ -32,5 +36,12 @@ public class Test02 {
         BookDto bookDto = bookService.findByPage(Integer.parseInt(page));
         ObjectMapper mapper=new ObjectMapper();
         return mapper.writeValueAsString(bookDto);
+    }
+
+    @Test
+    public void test01(){
+        List<Integer> list=new ArrayList<>();
+        list.add(1);
+        System.out.println(list);
     }
 }

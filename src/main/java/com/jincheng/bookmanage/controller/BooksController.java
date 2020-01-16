@@ -1,5 +1,7 @@
 package com.jincheng.bookmanage.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jincheng.bookmanage.dto.BookDto;
 import com.jincheng.bookmanage.entity.Book;
 import com.jincheng.bookmanage.service.BookService;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class BooksController {
@@ -62,7 +65,7 @@ public class BooksController {
     }
 
     //精确搜索书籍
-    @RequestMapping("searchBook")
+    @RequestMapping("/searchBook")
     @ResponseBody
     public Book searchBook(String name){
         //待写
@@ -71,10 +74,20 @@ public class BooksController {
     }
 
     //显示单一书本的详细信息
-    @RequestMapping("toSingleProduct")
+    @RequestMapping("/toSingleProduct")
     public String toSingleProduct(Integer id, Model model){
         model.addAttribute("book",service.findOneBookById(id));
-        return "/front/single-product";
+        return "front/single-product";
+    }
+
+    /**
+     * 根据传递过来的中文书籍分类名查询书籍
+     */
+    @RequestMapping("/book/findBookByType")
+    @ResponseBody
+    public String findBookByType(String type) throws JsonProcessingException {
+        List<Book> books=service.findAllBooksByBookType(type);
+        return new ObjectMapper().writeValueAsString(books);
     }
 
 }

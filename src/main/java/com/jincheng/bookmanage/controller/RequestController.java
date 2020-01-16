@@ -26,6 +26,11 @@ public class RequestController {
 
     @RequestMapping("/toqdAPI")
     public String toqdAPI(){
-        return "/backstage/tgls/qdAPI";
+        return "backstage/tgls/qdAPI";
+    }
+
+    @RequestMapping("/toRegister")
+    public String toRegister(){
+        return "front/register";
     }
 }

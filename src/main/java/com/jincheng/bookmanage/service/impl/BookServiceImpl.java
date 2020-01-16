@@ -102,4 +102,13 @@ public class BookServiceImpl implements BookService {
         PageInfo<Book> page = new PageInfo<Book>(list);
         return page;
     }
+
+    @Override
+    public List<Book> findAllBooksByBookType(String type) {
+        if (type.equals("All")){
+            return dao.findAllBooks();
+        }else {
+            return dao.findAllBooksByType(type);
+        }
+    }
 }

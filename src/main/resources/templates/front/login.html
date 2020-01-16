@@ -23,6 +23,8 @@
 			<label class="sr-only" th:text="#{login.password}">Password</label>
 			<input type="password" name="password" class="form-control" placeholder="Password" th:placeholder="#{login.password}" required="">
 			<div class="checkbox mb-3">
+				<a th:href="@{/toRegister}">没有账号？请点击我</a>
+				<br>
 				<label>
           <input type="checkbox" value="remember-me" > [[#{login.remenber}]]
         </label>

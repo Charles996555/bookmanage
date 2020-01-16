@@ -18,110 +18,58 @@
 		<title>后台管理界面</title>
 
 		<!-- 公共样式 开始 -->
-		<link rel="stylesheet" type="text/css" href="../..//css/base.css">
-		<link rel="stylesheet" type="text/css" href="../..//css/iconfont.css">
-		<script type="text/javascript" src="../..//framework/jquery-1.11.3.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../..//layui/css/layui.css">
-		<script type="text/javascript" src="../..//layui/layui.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/base.css">
+		<link rel="stylesheet" type="text/css" href="/css/iconfont.css">
+		<script type="text/javascript" src="/framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+		<script type="text/javascript" src="/layui/layui.js"></script>
 		<!-- 滚动条插件 -->
-		<link rel="stylesheet" type="text/css" href="../..//css/jquery.mCustomScrollbar.css">
-		<script src="../..//framework/jquery-ui-1.10.4.min.js"></script>
-		<script src="../..//framework/jquery.mousewheel.min.js"></script>
-		<script src="../..//framework/jquery.mCustomScrollbar.min.js"></script>
-		<script src="../..//framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<link rel="stylesheet" type="text/css" href="/css/jquery.mCustomScrollbar.css">
+		<script src="/framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="/framework/jquery.mousewheel.min.js"></script>
+		<script src="/framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="/framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
 		<!-- 公共样式 结束 -->
 		
-		<link rel="stylesheet" type="text/css" href="../..//css/reportForm.css">
+		<link rel="stylesheet" type="text/css" href="/css/reportForm.css">
 
 	</head>
 
 	<body>
 		<div class="cBody">
-			<div class="console">
-				<form class="layui-form" action="">
-					<div class="layui-form-item">
-						<div class="reportForm">
-							<a class="typeBut bl active">本周</a>
-							<a class="typeBut">上周</a>
-							<a class="typeBut">本月</a>
-							<a class="typeBut br">上月</a>
-						</div>
-						<div class="layui-input-inline">
-				        	<input type="text" class="layui-input" id="time" placeholder=" - ">
-						</div>
-						<button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
-						<a class="layui-btn layui-btn-primary exportBut" href="#">导出</a>
-					</div>
-				</form>
-
-			</div>
-			
 			<div class="reportForm_main">
 				<div class="collectData">
 				    <div class="layui-row">
 						<div class="layui-col-md3 br">
 							<div class="layui-col-md6">
-								<div class="title">订货单</div>
-								<div class="nums"><font>1</font><span>笔</span></div>
+								<div class="title">订单数</div>
+								<div class="nums"><font>[[${pageInfo.total}]]</font><span>笔</span></div>
 							</div>
-							<div class="layui-col-md6">
-								<div class="title">退货单</div>
-								<div class="nums"><font>0</font><span>笔</span></div>
-							</div>
-						</div>
-						<div class="layui-col-md3 br">
 							<div class="layui-col-md6">
 								<div class="title">订货客户数</div>
-								<div class="nums"><font>1</font></div>
-							</div>
-							<div class="layui-col-md6">
-								<div class="title">退货客户数</div>
-								<div class="nums"><font>1</font></div>
+								<div class="nums"><font>2</font></div>
 							</div>
 						</div>
-						<div class="layui-col-md2">
-							<div class="title">订货金额</div>
-							<div class="nums"><font>115.20</font></div>
-						</div>
-						<div class="layui-col-md2">
-							<div class="title">退货金额</div>
-							<div class="nums"><font>0.00</font></div>
-						</div>
-						<div class="layui-col-md2">
-							<div class="title">金额合计</div>
-							<div class="nums"><font>115.20</font></div>
-						</div>
+							<div class="layui-col-md3 br">
+								<div class="layui-col-md6">
+									<div class="title">订货总金额</div>
+									<div class="nums"><font>[[${totalOrderPrice}]]</font></div>
+								</div>
+								<div class="layui-col-md6">
+									<div class="title">实付金额</div>
+									<div class="nums"><font>[[${payOrderPrice}]]</font></div>
+								</div>
+							</div>
 					</div>
 				</div>
 				
 				<div class="reportType_tj">
 					<form class="layui-form" action="">
-		                <div class="layui-input-inline">
-		                    <select name="reportType" id="reportType" lay-filter="reportType">
-		                        <option value="订单数量">订单数量</option>
-		                        <option value="退货单数">退货单数</option>
-		                        <option value="订货金额">订货金额</option>
-		                        <option value="退货金额">退货金额</option>
-		                        <option value="金额合计">金额合计</option>
-		                    </select>
-		                </div>
-		                <div class="layui-input-inline">
-							<a class="pressBut active" onclick="refreshData([82, 2, 91, 34, 10, 120, 20],this)">按天</a>
-							<a class="pressBut" onclick="refreshData([10, 21, 1, 134, 210, 520, 420],this)">按周</a>
-							<a class="pressBut" onclick="refreshData([82, 2, 91, 34, 10, 120, 20],this)">按月</a>
-		                </div>
+
 		                <div class="changeRate">
-							<div class="layui-col-md6 left">115.20</div>
-							<div class="layui-col-md6 right">
-								<!--上升-->
-								<!--<span class="data up">-99.42%<i class="iconfont icon-xiangshangjiantoucuxiao"></i></span>-->
-								<!--下降-->
-								<span class="data">-99.42%<i class="iconfont icon-xiangxiajiantoucuxiao"></i></span>
-								<span class="text">相比上周期</span>
-							</div>
 		                </div>
 		                <div id="myReport" style="width: 100%; height: 400px;"></div>
-		                <script src="../..//framework/echarts.min.js"></script>
+		                <script src="/framework/echarts.min.js"></script>
 		                <script type="text/javascript">
 					        // 基于准备好的dom，初始化echarts实例
 					        var myChart = echarts.init(document.getElementById('myReport'));
@@ -131,7 +79,7 @@
 							    xAxis: {
 							        type: 'category',
 							        boundaryGap: false,
-							        data: ['2018-03-01', '2018-03-02', '2018-03-03', '2018-03-04', '2018-03-05', '2018-03-06', '2018-03-07']
+							        data: ['2019-06', '2019-07', '2019-08', '2019-09', '2019-10', '2019-11', '2019-12']
 							    },
 							    yAxis: {
 							        type: 'value'
@@ -143,7 +91,7 @@
 							    	right: 50
 							    },
 							    series: [{
-							        data: [820, 932, 901, 934, 1290, 1330, 1320],
+							        data: [11, 15, 10, 14, 20, 6, 16],
 							        type: 'line',
 							        areaStyle: {}
 							    }]
@@ -170,111 +118,68 @@
 				<table class="layui-table dataTable" lay-skin="line">
 					<thead>
 						<tr>
-							<th>日期（2018-03-01~2018-03-05）</th>
-							<th>订货单</th>
-							<th>退货单</th>
-							<th>订货客户数</th>
-							<th>退货客户数</th>
-							<th>订货金额</th>
-							<th>退货金额</th>
-							<th>金额小计</th>
+							<th>订单提交日期</th>
+							<th>订单号</th>
+							<th>购买账户</th>
+							<th>购买总金额</th>
+							<th>是否已经支付</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>2018-03-05</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>2018-03-04</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>2018-03-03</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>2018-03-02</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>2018-03-01</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
+						<tr th:each="order : ${pageInfo.list}">
+							<td th:text="${order.createtime}">2018-03-05</td>
+							<td th:text="${order.ordernumber}">0</td>
+							<td th:text="${order.username}">0</td>
+							<td th:text="${order.totalprice}">0</td>
+							<td th:text="${order.ispay}==0?'未支付':'已支付'">0</td>
+							<td>
+								<button class="layui-btn layui-btn-xs layui-btn-danger"><div th:onclick="'deleteOrder('+${order.id}+')'">删除订单</div></button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<!-- layUI 分页模块 -->
-			<div id="pages"></div>
-			<script>
-				layui.use(['form','laydate', 'layer', 'laypage'], function() {
-					var form = layui.form;
-					var laydate = layui.laydate;
-					var laypage = layui.laypage,
-						layer = layui.layer;
-			
-					//监听提交
-					form.on('submit(formDemo)', function(data) {
-						layer.msg(JSON.stringify(data.field));
-						return false;
-					});
-					laydate.render({
-					    elem: '#time' 
-				    	,range: true
-					});
-					//select监听
-					form.on('select(reportType)', function(data){
-					  console.log(data.elem); //得到select原始DOM对象
-					  console.log(data.value); //得到被选中的值
-					  console.log(data.othis); //得到美化后的DOM对象
-					});
-					
-				
-					//总页数大于页码总数
-					laypage.render({
-					    elem: 'pages'
-					    ,count: 5
-					    ,layout: ['prev', 'page', 'next', 'limit', 'skip']
-					    ,jump: function(obj){
-					      console.log(obj)
-					    }
-					});
-				});
-			</script>
-			
-			
-			
+			<!-- 分页模块改造 -->
+			<div id="pages2">
+				<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
+					<div style="float: left;"><span class="layui-laypage-count">共 [[${pageInfo.total}]] 条</span></div>
+					<div style="float: left;"><a th:if="${pageInfo.hasPreviousPage}"  th:href="'/manage/toReportForm?pageNo='+${pageInfo.prePage}" class="layui-laypage-prev layui-disabled">上一页</a></div>
+					<div width="10%" th:each="nav : ${pageInfo.navigatepageNums}" style="float: left;">
+						<a th:href="'/manage/toReportForm?pageNo='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+						<span style="font-weight: bold;background-color: #009688;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}"></span>
+					</div>
+					<div style="float: left;"><a th:if="${pageInfo.hasNextPage}" th:href="'/manage/toReportForm?pageNo='+${pageInfo.nextPage}" class="layui-laypage-next">下一页</a></div>
+				</div>
+			</div>
 		</div>
+		<!--删除功能js-->
+		<script>
+			function deleteOrder(id){
+				window.event.returnValue=false;
+				let msg = "您确定要删除该条数据吗？";
+				if (confirm(msg)==true){
+					$.ajax({
+						type: "POST",
+						dataType: "json",
+						url: "/manage/deleteOrder" ,
+						data: {
+							id:id,
+						},
+						success: function (result) {
+							window.alert(result);
+							window.location.href = "/manage/toReportForm";
+						},
+						error : function() {
+							alert("异常！");
+						}
+					});
+				}else{
+					return false;
+				}
+
+			}
+		</script>
 	</body>
 
 </html>

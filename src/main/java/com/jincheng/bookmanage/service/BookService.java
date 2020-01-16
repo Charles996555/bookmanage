@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.jincheng.bookmanage.dto.BookDto;
 import com.jincheng.bookmanage.entity.Book;
 
+import java.util.List;
+
 
 public interface BookService {
 
@@ -23,4 +25,6 @@ public interface BookService {
     String deleteOneBook(Integer id);
 
     PageInfo<Book> getBookByName(int pageNo, int pageSize, String name);
+
+    List<Book> findAllBooksByBookType(String type);
 }

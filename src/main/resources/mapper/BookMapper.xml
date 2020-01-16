@@ -42,4 +42,9 @@
 	<select id="findByBookName" resultType="com.jincheng.bookmanage.entity.Book">
 		select * from book where name like concat("%",#{name},"%")
 	</select>
+
+	<!--根据类型查询全部书籍-->
+	<select id="findAllBooksByType" resultType="com.jincheng.bookmanage.entity.Book">
+		select * from book where type=#{type}
+	</select>
 </mapper>
